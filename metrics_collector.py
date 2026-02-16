@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Metrics Collector for SQA Project
-??? ?????? ???? ????????? ???????
+جمع مقاييس جودة البرمجيات للتقييم
 """
 
 import json
@@ -19,7 +19,7 @@ class MetricsCollector:
         }
     
     def collect_test_metrics(self, total_tests, passed, failed, skipped):
-        """??? ?????? ????????"""
+        """جمع مقاييس الاختبار"""
         self.metrics['test_metrics'] = {
             'total_tests': total_tests,
             'passed': passed,
@@ -30,14 +30,14 @@ class MetricsCollector:
         }
     
     def collect_coverage_metrics(self, coverage_percentage):
-        """??? ?????? ???????"""
+        """جمع مقاييس التغطية"""
         self.metrics['quality_metrics'] = {
             'test_coverage': f'{coverage_percentage}%',
             'code_quality': 'Good' if coverage_percentage >= 80 else 'Needs Improvement'
         }
     
     def collect_efficiency_metrics(self, manual_time, automated_time):
-        """??? ?????? ???????"""
+        """جمع مقاييس الكفاءة"""
         time_saved = manual_time - automated_time
         efficiency_gain = ((manual_time - automated_time) / manual_time * 100) if manual_time > 0 else 0
         
@@ -50,13 +50,13 @@ class MetricsCollector:
         }
     
     def save_report(self, filename='evaluation_report.json'):
-        """??? ???????"""
+        """حفظ التقرير"""
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(self.metrics, f, indent=2, ensure_ascii=False)
         print(f'Evaluation report saved to {filename}')
     
     def print_summary(self):
-        """??? ???? ????????"""
+        """عرض ملخص المقاييس"""
         print('\n' + '='*60)
         print('SQA PROJECT EVALUATION SUMMARY')
         print('='*60)
