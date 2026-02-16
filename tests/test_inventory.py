@@ -4,25 +4,25 @@ from pages.inventory_page import InventoryPage
 
 class TestInventory:
     '''
-    ????? ?????? ???? ????????
+    حالات اختبار صفحة المنتجات
     '''
     
     def test_add_product_to_cart(self, driver, base_url):
         '''
-        TC-004: ?????? ?? ????? ???? ?????
+        TC-004: التحقق من إضافة منتج للسلة
         '''
-        # ????? ?????? ?????
+        # تسجيل الدخول أولاً
         login_page = LoginPage(driver)
         login_page.open(base_url)
         login_page.enter_username('standard_user')
         login_page.enter_password('secret_sauce')
         login_page.click_login()
         
-        # ???????? ????? ????????
+        # الانتقال لصفحة المنتجات
         inventory_page = InventoryPage(driver)
         assert inventory_page.get_title() == 'Products'
         
-        # ????? ???? ?????
+        # إضافة منتج للسلة
         inventory_page.add_product_to_cart()
-        assert inventory_page.get_cart_count() == '1'
-
+        cart_count = inventory_page.get_cart_count()
+        assert cart_count == '1', f'Expected cart count 1, got {cart_count}'

@@ -4,27 +4,37 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class InventoryPage:
     '''
-    Page Object Model ????? ????????
+    Page Object Model لصفحة المنتجات
     '''
-
-    # Locators
+    
+    # Locators (محدثة)
     PRODUCTS_TITLE = (By.CLASS_NAME, 'title')
     ADD_TO_CART_BUTTON = (By.ID, 'add-to-cart-sauce-labs-backpack')
-    CART_BADGE = (By.CLASS_NAME, 'shopping_cart_badge')
-
+    CART_BADGE = (By.CSS_SELECTOR, 'span.shopping_cart_badge')
+    CART_BUTTON = (By.CLASS_NAME, 'shopping_cart_link')
+    
     def __init__(self, driver):
         self.driver = driver
-
+        self.wait = WebDriverWait(driver, 10)
+    
     def get_title(self):
-        '''?????? ??? ????? ??????'''
+        '''الحصول على عنوان الصفحة'''
         return self.driver.find_element(*self.PRODUCTS_TITLE).text
-
+    
     def add_product_to_cart(self):
-        '''????? ???? ?????'''
+        '''إضافة منتج للسلة'''
         self.driver.find_element(*self.ADD_TO_CART_BUTTON).click()
-
+    
     def get_cart_count(self):
-        '''?????? ??? ??? ???????? ?? ????? ??? ?? ??????'''
-        wait = WebDriverWait(self.driver, 10)
-        cart_badge = wait.until(EC.presence_of_element_located(self.CART_BADGE))
-        return cart_badge.text
+        '''الحصول على عدد المنتجات في السلة'''
+        try:
+            element = self.wait.until(
+                EC.visibility_of_element_located(self.CART_BADGE)
+            )
+            return element.text
+        except:
+            return '0'
+    
+    def click_cart(self):
+        '''النقر على زر السلة'''
+        self.driver.find_element(*self.CART_BUTTON).click()
