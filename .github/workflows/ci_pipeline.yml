@@ -15,7 +15,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    # 2. Setup Python (?????? ????? ?????)
+    # 2. Setup Python
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -27,29 +27,19 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
-    # 4. Debug: Show installed packages
-    - name: Debug - Show packages
-      run: |
-        pip list
-    
-    # 5. Debug: Show test files
-    - name: Debug - Show test structure
-      run: |
-        ls -R tests/
-    
-    # 6. Run tests with pytest
+    # 4. Run tests with detailed output
     - name: Run automated tests
       run: |
-        python -m pytest tests/ -v --tb=short
+        python -m pytest tests/ -v --tb=long --html=reports/test_report.html --self-contained-html
       env:
         CI: true
     
-    # 7. Upload test report as artifact
+    # 5. Upload test report as artifact
     - name: Upload test report
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: test-report
-        path: reports/
+        path: reports/test_report.html
         retention-days: 7
 
