@@ -1,0 +1,52 @@
+name: SQA CI Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # 1. Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    # 2. Setup Python
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.14'
+    
+    # 3. Install dependencies
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    # 4. Run tests with pytest
+    - name: Run automated tests
+      run: |
+        python -m pytest tests/ -v --html=reports/test_report.html --self-contained-html
+    
+    # 5. Upload test report as artifact
+    - name: Upload test report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-report
+        path: reports/test_report.html
+        retention-days: 7
+    
+    # 6. Upload coverage report (if available)
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: coverage-report
+        path: reports/
+        retention-days: 7
+
