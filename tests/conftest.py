@@ -2,8 +2,8 @@ import pytest
 import os
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 
 @pytest.fixture
 def driver():
@@ -14,14 +14,16 @@ def driver():
     
     # ????? ??? Headless ??? CI
     if os.getenv('CI'):
-        options.add_argument('--headless')
+        options.add_argument('--headless=new')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
         options.add_argument('--disable-gpu')
         options.add_argument('--window-size=1920,1080')
+        options.add_argument('--disable-blink-features=AutomationControlled')
     else:
         options.add_argument('--start-maximized')
     
+    # ??????? WebDriver Manager ?????? ChromeDriver ????????
     driver = webdriver.Chrome(
         service=Service(ChromeDriverManager().install()),
         options=options

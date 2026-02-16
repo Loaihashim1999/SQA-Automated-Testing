@@ -21,26 +21,22 @@ jobs:
       with:
         python-version: '3.11'
     
-    # 3. Install Chrome Browser
-    - name: Install Chrome
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y google-chrome-stable
-    
-    # 4. Install dependencies
+    # 3. Install dependencies
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install pytest-cov
     
-    # 5. Run tests with pytest
+    # 4. Run tests with pytest (Headless mode enabled via conftest.py)
     - name: Run automated tests
       run: |
         python -m pytest tests/ -v --html=reports/test_report.html --self-contained-html
       env:
         CI: true
+        PYTEST_ADDOPTS: '--headless'
     
-    # 6. Upload test report as artifact
+    # 5. Upload test report as artifact
     - name: Upload test report
       uses: actions/upload-artifact@v4
       if: always()
