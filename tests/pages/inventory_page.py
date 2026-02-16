@@ -10,7 +10,7 @@ class InventoryPage:
     # Locators
     PRODUCTS_TITLE = (By.CLASS_NAME, 'title')
     ADD_TO_CART_BUTTON = (By.ID, 'add-to-cart-sauce-labs-backpack')
-    CART_BADGE = (By.CSS_SELECTOR, 'div.shopping_cart_badge')
+    CART_BADGE = (By.CSS_SELECTOR, 'span.shopping_cart_badge')
     CART_BUTTON = (By.CLASS_NAME, 'shopping_cart_link')
     
     def __init__(self, driver):
