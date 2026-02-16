@@ -1,6 +1,7 @@
 ﻿from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import time
 
 class InventoryPage:
     '''
@@ -23,15 +24,15 @@ class InventoryPage:
 
     def add_product_to_cart(self):
         '''إضافة منتج للسلة'''
-        add_button = self.wait.until(
-            EC.element_to_be_clickable(self.ADD_TO_CART_BUTTON)
-        )
-        add_button.click()
-        
-        # انتظر حتى يظهر شارة السلة برقم 1
-        self.wait.until(
-            EC.text_to_be_present_in_element(self.CART_BADGE, '1')
-        )
+        try:
+            add_button = self.wait.until(
+                EC.element_to_be_clickable(self.ADD_TO_CART_BUTTON)
+            )
+            add_button.click()
+            # انتظر قليلاً حتى يتم تحديث واجهة المستخدم
+            time.sleep(1)
+        except Exception as e:
+            raise Exception(f'Failed to add product to cart: {str(e)}')
 
     def get_cart_count(self):
         '''الحصول على عدد المنتجات في السلة'''
@@ -39,7 +40,8 @@ class InventoryPage:
             element = self.wait.until(
                 EC.visibility_of_element_located(self.CART_BADGE)
             )
-            return element.text
+            count = element.text
+            return count if count else '0'
         except:
             return '0'
 
