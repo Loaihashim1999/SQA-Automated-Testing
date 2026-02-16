@@ -55,7 +55,7 @@
 
 ## Slide 5: Project Architecture
 
-\\\
+'''
 SQA_Project/
 +-- .github/workflows/ci_pipeline.yml
 +-- tests/
@@ -67,7 +67,7 @@ SQA_Project/
 ¦       +-- inventory_page.py
 +-- reports/
 +-- requirements.txt
-\\\
+'''
 
 **Design Pattern:** Page Object Model (POM)
 
@@ -112,9 +112,9 @@ SQA_Project/
 ## Slide 8: CI/CD Pipeline
 
 ### Pipeline Flow
-\\\
+'''
 Push Code ? Checkout ? Setup Python ? Install ? Run Tests ? Generate Reports ? Upload Artifacts
-\\\
+'''
 
 ### Pipeline Metrics
 | Metric | Value |

@@ -23,19 +23,15 @@ This project successfully demonstrates the importance of Software Quality Assura
 Software Quality Assurance ensures that software products meet specified quality standards. With growing complexity, manual testing alone has become inefficient.
 
 ### 1.2 Problem Statement
-Many software development teams still rely heavily on manual testing methods, which are:
-- Time-consuming
-- Error-prone
-- Difficult to maintain
-- Lead to late defect detection
+Many software development teams still rely heavily on manual testing methods, which are time-consuming, error-prone, and difficult to maintain.
 
 ### 1.3 Objectives
 | # | Objective | Status |
 | :--- | :--- | :--- |
 | 1 | Design and develop an automated testing framework | ? Achieved |
-| 2 | Integrate testing and code analysis into CI process | ? Achieved |
+| 2 | Integrate testing and code analysis into a CI process | ? Achieved |
 | 3 | Evaluate improvements in defect detection and test coverage | ? Achieved |
-| 4 | Promote best practices in SQA using automation tools | ? Achieved |
+| 4 | Promote best practices in SQA by using automation tools | ? Achieved |
 
 ---
 
@@ -61,26 +57,6 @@ Many software development teams still rely heavily on manual testing methods, wh
 | Phase 4: Evaluation | Week 8-9 | ? Completed |
 | Phase 5: Documentation | Week 10 | ? Completed |
 
-### 2.3 Project Structure
-\\\
-SQA_Project/
-+-- .github/workflows/
-¦   +-- ci_pipeline.yml
-+-- tests/
-¦   +-- conftest.py
-¦   +-- test_login.py
-¦   +-- test_inventory.py
-¦   +-- pages/
-¦       +-- __init__.py
-¦       +-- login_page.py
-¦       +-- inventory_page.py
-+-- reports/
-+-- .gitignore
-+-- requirements.txt
-+-- README.md
-+-- FINAL_REPORT.md
-\\\
-
 ---
 
 ## 3. Results
@@ -94,15 +70,7 @@ SQA_Project/
 | Skipped | 0 |
 | **Pass Rate** | **100%** |
 
-### 3.2 Test Cases Details
-| ID | Test Case | Expected Result | Status |
-| :--- | :--- | :--- | :--- |
-| TC-001 | Login with valid credentials | User logged in successfully | ? PASSED |
-| TC-002 | Login with invalid username | Error message displayed | ? PASSED |
-| TC-003 | Login with empty username | Error message displayed | ? PASSED |
-| TC-004 | Add product to cart | Cart count updated | ? PASSED |
-
-### 3.3 Efficiency Metrics
+### 3.2 Efficiency Metrics
 | Metric | Manual | Automated | Improvement |
 | :--- | :--- | :--- | :--- |
 | Execution Time | 120 minutes | 15 minutes | **87.5% Faster** |
@@ -110,7 +78,7 @@ SQA_Project/
 | Reusability | Low | High | **Excellent** |
 | Accuracy | Variable | Consistent | **Improved** |
 
-### 3.4 Quality Metrics
+### 3.3 Quality Metrics
 | Metric | Value | Target | Status |
 | :--- | :--- | :--- | :--- |
 | Test Coverage | 100% | 100% | ? Achieved |
@@ -194,20 +162,7 @@ The project successfully achieved all objectives:
 
 ---
 
-## 9. Appendix
-
-### 9.1 Test Report Sample
-Available in GitHub Actions Artifacts
-
-### 9.2 Coverage Report
-Available in GitHub Actions Artifacts
-
-### 9.3 Source Code
-Available at: https://github.com/Loaihashim1999/SQA-Automated-Testing
-
----
-
-**Report Generated:** 2026-02-16
-**Author:** Loai Hashim
-**Course:** Software Quality Assurance
+**Report Generated:** 2026-02-16  
+**Author:** Loai Hashim  
+**Course:** Software Quality Assurance  
 **Status:** ? Completed
