@@ -19,11 +19,9 @@ def driver():
         options.add_argument('--disable-dev-shm-usage')
         options.add_argument('--disable-gpu')
         options.add_argument('--window-size=1920,1080')
-        options.add_argument('--disable-blink-features=AutomationControlled')
     else:
         options.add_argument('--start-maximized')
     
-    # ??????? WebDriver Manager ?????? ChromeDriver ????????
     driver = webdriver.Chrome(
         service=Service(ChromeDriverManager().install()),
         options=options

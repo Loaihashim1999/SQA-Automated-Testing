@@ -2,9 +2,8 @@ venv/
 __pycache__/
 *.pyc
 .pytest_cache/
-reports/*.html
+reports/
 .DS_Store
 .gitignore.txt
 *.log
-.env
 

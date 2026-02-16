@@ -15,7 +15,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    # 2. Setup Python
+    # 2. Setup Python (?????? ????? ?????)
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -26,22 +26,30 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install pytest-cov
     
-    # 4. Run tests with pytest (Headless mode enabled via conftest.py)
+    # 4. Debug: Show installed packages
+    - name: Debug - Show packages
+      run: |
+        pip list
+    
+    # 5. Debug: Show test files
+    - name: Debug - Show test structure
+      run: |
+        ls -R tests/
+    
+    # 6. Run tests with pytest
     - name: Run automated tests
       run: |
-        python -m pytest tests/ -v --html=reports/test_report.html --self-contained-html
+        python -m pytest tests/ -v --tb=short
       env:
         CI: true
-        PYTEST_ADDOPTS: '--headless'
     
-    # 5. Upload test report as artifact
+    # 7. Upload test report as artifact
     - name: Upload test report
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: test-report
-        path: reports/test_report.html
+        path: reports/
         retention-days: 7
 
