@@ -1,18 +1,40 @@
 from selenium.webdriver.common.by import By
 
 class LoginPage:
+    '''
+    Page Object Model ????? ????? ??????
+    '''
+    
+    # Locators
+    USERNAME_FIELD = (By.ID, 'user-name')
+    PASSWORD_FIELD = (By.ID, 'password')
+    LOGIN_BUTTON = (By.ID, 'login-button')
+    ERROR_MESSAGE = (By.CSS_SELECTOR, '.error-message-container')
+    
     def __init__(self, driver):
         self.driver = driver
-        self.username_field = (By.ID, 'user-name')
-        self.password_field = (By.ID, 'password')
-        self.login_button = (By.ID, 'login-button')
+    
+    def open(self, base_url):
+        '''??? ???? ????? ??????'''
+        self.driver.get(base_url)
     
     def enter_username(self, username):
-        self.driver.find_element(*self.username_field).send_keys(username)
+        '''????? ??? ????????'''
+        self.driver.find_element(*self.USERNAME_FIELD).send_keys(username)
     
     def enter_password(self, password):
-        self.driver.find_element(*self.password_field).send_keys(password)
+        '''????? ???? ??????'''
+        self.driver.find_element(*self.PASSWORD_FIELD).send_keys(password)
     
     def click_login(self):
-        self.driver.find_element(*self.login_button).click()
+        '''????? ??? ?? ????? ??????'''
+        self.driver.find_element(*self.LOGIN_BUTTON).click()
+    
+    def get_error_message(self):
+        '''?????? ??? ????? ?????'''
+        return self.driver.find_element(*self.ERROR_MESSAGE).text
+    
+    def is_logged_in(self):
+        '''?????? ?? ???? ????? ??????'''
+        return 'products' in self.driver.current_url
 
