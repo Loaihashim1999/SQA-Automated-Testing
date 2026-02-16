@@ -1,17 +1,16 @@
 import pytest
 import os
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
 @pytest.fixture
 def driver():
     '''
-    ????? ??????? ??? ?? ?????? ??????? ??? ????????
+    إعداد المتصفح قبل كل اختبار وإغلاقه بعد الانتهاء
     '''
     options = Options()
     
-    # ????? ??? Headless ??? CI
+    # تفعيل وضع Headless للـ CI
     if os.getenv('CI'):
         options.add_argument('--headless=new')
         options.add_argument('--no-sandbox')
@@ -21,7 +20,7 @@ def driver():
     else:
         options.add_argument('--start-maximized')
     
-    # ??????? Selenium Manager ?????? (?? ????? webdriver-manager)
+    # استخدام Selenium Manager المدمج (لا يحتاج webdriver-manager)
     driver = webdriver.Chrome(options=options)
     driver.implicitly_wait(10)
     
@@ -32,6 +31,6 @@ def driver():
 @pytest.fixture
 def base_url():
     '''
-    ???? ?????? ???????
+    رابط الموقع الأساسي
     '''
     return 'https://www.saucedemo.com/'
