@@ -19,34 +19,33 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.14'
+        python-version: '3.11'
     
-    # 3. Install dependencies
+    # 3. Install Chrome Browser
+    - name: Install Chrome
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
+    
+    # 4. Install dependencies
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
-    # 4. Run tests with pytest
+    # 5. Run tests with pytest
     - name: Run automated tests
       run: |
         python -m pytest tests/ -v --html=reports/test_report.html --self-contained-html
+      env:
+        CI: true
     
-    # 5. Upload test report as artifact
+    # 6. Upload test report as artifact
     - name: Upload test report
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: test-report
         path: reports/test_report.html
-        retention-days: 7
-    
-    # 6. Upload coverage report (if available)
-    - name: Upload coverage report
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: coverage-report
-        path: reports/
         retention-days: 7
 
