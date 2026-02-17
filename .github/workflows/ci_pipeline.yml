@@ -27,19 +27,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
-    # 4. Run tests with coverage
+    # 4. Run automated tests
     - name: Run automated tests
       run: |
         python -m pytest tests/ -v --html=reports/test_report.html --self-contained-html --cov=tests --cov-report=html --cov-report=xml
       env:
         CI: true
     
-    # 5. Collect metrics
-    - name: Collect metrics
-      run: |
-        python metrics_collector.py
-    
-    # 6. Upload test report
+    # 5. Upload test report
     - name: Upload test report
       uses: actions/upload-artifact@v4
       if: always()
@@ -48,20 +43,11 @@ jobs:
         path: reports/test_report.html
         retention-days: 7
     
-    # 7. Upload coverage report
+    # 6. Upload coverage report
     - name: Upload coverage report
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: coverage-report
         path: htmlcov/
-        retention-days: 7
-    
-    # 8. Upload evaluation report
-    - name: Upload evaluation report
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: evaluation-report
-        path: evaluation_report.json
         retention-days: 7
